@@ -1,25 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
+import WeatherPage from './pages/WeatherPage';
+import FavoritesPage from './pages/FavoritesPage';
+import TopBar from './components/TopBar';
+import { Route, Switch } from 'react-router-dom';
+import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 
 function App() {
+  let mainTheme = createTheme({
+    typography: {
+      fontFamily: [
+        `'Montserrat', 
+        sans-serif`
+      ].join(','),
+    }
+  });
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider theme={mainTheme}>
+      <div>
+        <TopBar />
+        <Switch>
+          <Route exact path='/' component={WeatherPage} />
+          <Route exact path='/home' component={WeatherPage} />
+          <Route exact path='/favorites' component={FavoritesPage} />
+        </Switch>
+      </div>
+    </ThemeProvider>
+  )
 }
 
 export default App;
