@@ -7,6 +7,6 @@ function FavoritesPage() {
 
         </Grid>
     )
-}
+};
 
 export default FavoritesPage;

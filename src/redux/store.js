@@ -11,5 +11,5 @@ export default function configureAppStore (preloadedState) {
   const composedEnhancers = composeWithDevTools(...enhancers);
   const store = createStore(createRootReducer(), preloadedState, composedEnhancers);
 
-  return store
+  return store;
 }

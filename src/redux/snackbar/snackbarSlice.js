@@ -1,0 +1,45 @@
+import { createSlice } from '@reduxjs/toolkit'
+
+
+export const snackbarSlice = createSlice({
+    name: 'snackbar',
+    initialState: {
+        visible: false,
+        timeout: 3000,
+        message: '',
+        type: 'success'
+    },
+    reducers: {
+      turnOnSnackbar: (state, action) => {
+        state.visible = true;
+        state.timeout = action.payload.timeout;
+        state.message = action.payload.message;
+        state.type = action.payload.type;
+      },
+      turnOffSnackbar: (state) => {
+          state.visible = false;
+      }
+      
+    }
+});
+
+let timeoutInstance = null;
+
+export const disableSnackbar = () => (dispatch) => {
+    dispatch(turnOffSnackbar);
+    clearTimeout(timeoutInstance);
+  };
+  
+  export const setSnackbar = ({type, message, timeout = 2000}) => (dispatch) =>{ 
+      console.log('called')
+      console.log('(type, message, timeout', type, message, timeout)
+    dispatch(turnOnSnackbar({type,message,timeout}));
+    timeoutInstance = setTimeout(() => {
+        dispatch(turnOffSnackbar);
+    }, timeout);
+  }
+  
+
+export const { turnOnSnackbar, turnOffSnackbar } = snackbarSlice.actions;
+  
+export default snackbarSlice.reducer;
