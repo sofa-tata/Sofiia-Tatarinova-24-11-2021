@@ -25,6 +25,6 @@ function Search() {
       </Grid>
     </Grid>
   )
-}
+};
 
 export default Search;

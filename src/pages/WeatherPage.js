@@ -1,8 +1,9 @@
 import React from 'react';
-import { Grid, Typography} from '@material-ui/core';
+import { Grid} from '@material-ui/core';
 import Search from '../components/Search';
 
 function WeatherPage() {
+
     return (
         <Grid container>
             <Grid item xs={12}>
@@ -15,6 +16,6 @@ function WeatherPage() {
             
         </Grid>
     )
-}
+};
 
 export default WeatherPage;

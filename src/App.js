@@ -4,6 +4,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import TopBar from './components/TopBar';
 import { Route, Switch } from 'react-router-dom';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
+import CustomizedSnackbar from './components/Snackbar';
 
 function App() {
   let mainTheme = createTheme({
@@ -19,6 +20,7 @@ function App() {
     <ThemeProvider theme={mainTheme}>
       <div>
         <TopBar />
+        <CustomizedSnackbar />
         <Switch>
           <Route exact path='/' component={WeatherPage} />
           <Route exact path='/home' component={WeatherPage} />

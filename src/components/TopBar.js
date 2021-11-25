@@ -1,11 +1,11 @@
 import {
   AppBar,
   Grid,
-  makeStyles,
   Toolbar,
   Typography
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import { useStyles } from '../utils/styles/TopBarStyles';
 
 function TopBar() {
   const classes = useStyles();
@@ -39,21 +39,6 @@ function TopBar() {
       </Toolbar>
     </AppBar>
   )
-}
+};
 
 export default TopBar;
-
-const useStyles = makeStyles((theme) => ({
-  header: {
-    backgroundColor: '#FFFFFF',
-    zIndex: 3000
-  },
-  title: {
-    color: '#000000',
-    marginLeft: '40px'
-  },
-  link: {
-    textDecoration: 'none',
-    color: '#000000'
-  }
-}));
