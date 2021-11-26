@@ -33,7 +33,7 @@ export const disableSnackbar = () => (dispatch) => {
   export const setSnackbar = ({type, message, timeout = 2000}) => (dispatch) =>{ 
     dispatch(turnOnSnackbar({type,message,timeout}));
     timeoutInstance = setTimeout(() => {
-        dispatch(turnOffSnackbar);
+        dispatch(disableSnackbar());
     }, timeout);
   }
   

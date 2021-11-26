@@ -11,8 +11,11 @@ export const mainSlice = createSlice({
     name: 'main',
     initialState: {
       citiesOptions: [],
-      currentCity: {},
-      currentWeather: {},
+      currentCity: {
+        value: null,
+        inputValue: ''
+      },
+      currentWeather: null,
       fiveDaysForecast: []
     },
     reducers: {
@@ -20,7 +23,7 @@ export const mainSlice = createSlice({
         state.citiesOptions = action.payload;
       },
       setCurrentCity: (state, action) => {
-        state.currentCity = action.payload;
+        state.currentCity[action.payload.key] = action.payload.value;
       },
       setCurrentWeather: (state, action) => {
           state.currentWeather = action.payload;
@@ -53,7 +56,7 @@ export const getCurrentWeather = (locationKey) => async (dispatch) => {
     try {
         // const res = await axios.get(`${BASE_URL}${END_POINT.CURRENT_WEATHER}/${locationKey}`, {params: { apikey: API_KEY }});
         const res = currentWeather
-        console.log('currentWeather', res)
+        console.log('currentWeather', res[0])
         // if(res.status === 200){                 
             await dispatch(setCurrentWeather(res[0]));
         // }    
@@ -70,7 +73,7 @@ export const getFiveDaysForecast = (locationKey) => async (dispatch) => {
         const res = fiveDaysForecast
         console.log('fiveDaysForecast', res)
         // if(res.status === 200){                 
-            await dispatch(setFiveDaysForecast(res));
+            await dispatch(setFiveDaysForecast(res.DailyForecasts));
         // }    
       } catch(error) {
         dispatch(actionSnackbar.setSnackbar({type: 'error', message: error.message, timeout: 3000}));

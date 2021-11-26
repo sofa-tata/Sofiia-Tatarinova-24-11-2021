@@ -1,43 +1,49 @@
 import React, { useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import { Grid, TextField, InputAdornment } from '@material-ui/core';
-import { useStyles } from '../utils/styles/SearchStyles';
-import { Autocomplete } from '@material-ui/lab';
+import { Grid, TextField, InputAdornment, IconButton} from '@material-ui/core';
+import { CustomizedAutocomplete } from '../utils/styles/SearchStyles';
 import * as mainAction from '../redux/main/mainSlice';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Search() {
-  const classes = useStyles();
+  // const classes = useStyles();
   const dispatch = useDispatch();
   const citiesOptions = useSelector(state => state.main.citiesOptions);
   const currentCity = useSelector(state => state.main.currentCity);
 
-  useEffect(() => {
-    if (currentCity) {
-      dispatch(mainAction.getCurrentWeather(currentCity.Key))
-      dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
-    }
-  }, [currentCity])
+  // useEffect(() => {
+  //   if (currentCity) {
+  //     dispatch(mainAction.getCurrentWeather(currentCity.Key))
+  //     dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
+  //   }
+  // }, [currentCity])
 
   const handleInputChange = (value) => {
+    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: value}))
     dispatch(mainAction.getCitiesOptions(value))
   }
 
   const handleChange = (value) => {
-    dispatch(mainAction.setCurrentCity(value)) 
+    dispatch(mainAction.setCurrentCity({key: 'value', value: value}))
+    if (currentCity) {
+          dispatch(mainAction.getCurrentWeather(currentCity.Key))
+          dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
+        }
+
   }
 
   return (
-    <Grid container className={classes.searchContainer}>
-      <Grid item xs={12}>
-      <Autocomplete
+    // <Grid container className={classes.searchContainer}>
+      // <Grid item xs={3}>
+      <CustomizedAutocomplete
                 id="city"
+                freeSolo
                 options={citiesOptions}
                 autoHighlight
-                // autoComplete='off'
-                popupIcon={ <SearchIcon style={{ width: 14 }} />}
-                value={currentCity}
-                inputValue={currentCity && currentCity.LocalizedName}
+                disableClearable
+                inputVariant='outlined'
+                value={currentCity && currentCity.value}
+                inputValue={currentCity && currentCity.inputValue}
                 getOptionLabel={(option) => option.LocalizedName || ''}
                 getOptionSelected={(option, value) =>
                   option.name === value
@@ -59,28 +65,33 @@ function Search() {
                       {...params}
                       inputProps={{
                         ...params.inputProps,
-                        // autoComplete: 'new-password',
+                      }}
+                      InputProps={{
+                        ...params.InputProps,
+                        startAdornment: (
+                              <SearchIcon />
+                        ),
                       }}
                     />
                   )
                 }}
               />
-        {/* <TextField
-          name='search'
-          placeholder='Search city...'
-          autoComplete='off'
-          variant='outlined'
-          style={{ width: '100%' }}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position='start'>
-                <SearchIcon style={{ width: 14 }} />
-              </InputAdornment>
-            )
-          }}
-        /> */}
-      </Grid>
-    </Grid>
+        // {/* <TextField
+        //   name='search'
+        //   placeholder='Search city...'
+        //   autoComplete='off'
+        //   variant='outlined'
+        //   style={{ width: '100%' }}
+        //   InputProps={{
+        //     startAdornment: (
+        //       <InputAdornment position='start'>
+        //         <SearchIcon style={{ width: 14 }} />
+        //       </InputAdornment>
+        //     )
+        //   }}
+        // /> */}
+      //  </Grid>
+    // </Grid>
   )
 };
 
