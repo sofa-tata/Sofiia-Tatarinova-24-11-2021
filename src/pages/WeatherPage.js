@@ -27,17 +27,6 @@ function WeatherPage() {
     }
   }, [currentCity, favorites]);
 
-  useEffect(() => {
-    console.log('fiveDaysForecast', fiveDaysForecast);
-  }, [fiveDaysForecast]);
-
-  // useEffect(() => {
-  //   if (currentCity) {
-
-  //     dispatch(mainAction.getCurrentWeather(currentCity.Key))
-  //     dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
-  //   }
-  // }, [currentCity])
 
   const handleChange = () => {
     if (currentCity) {

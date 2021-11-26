@@ -11,12 +11,12 @@ function Search() {
   const citiesOptions = useSelector(state => state.main.citiesOptions);
   const currentCity = useSelector(state => state.main.currentCity);
 
-  // useEffect(() => {
-  //   if (currentCity) {
-  //     dispatch(mainAction.getCurrentWeather(currentCity.Key))
-  //     dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
-  //   }
-  // }, [currentCity])
+  useEffect(() => {
+    if (currentCity.value) {
+      dispatch(mainAction.getCurrentWeather(currentCity.value.Key))
+      dispatch(mainAction.getFiveDaysForecast(currentCity.value.Key))
+    }
+  }, [currentCity])
 
   const handleInputChange = (value) => {
     dispatch(mainAction.setCurrentCity({key: 'inputValue', value: value}))
@@ -24,11 +24,12 @@ function Search() {
   }
 
   const handleChange = (value) => {
-    dispatch(mainAction.setCurrentCity({key: 'value', value: value}))
-    if (currentCity) {
-          dispatch(mainAction.getCurrentWeather(currentCity.Key))
-          dispatch(mainAction.getFiveDaysForecast(currentCity.Key))
-        }
+     dispatch(mainAction.setCurrentCity({key: 'value', value: value}))
+
+    // if (currentCity.value) {
+    //       dispatch(mainAction.getCurrentWeather(currentCity.value.Key))
+    //       dispatch(mainAction.getFiveDaysForecast(currentCity.value.Key))
+    //     }
 
   }
 
@@ -41,7 +42,6 @@ function Search() {
                 options={citiesOptions}
                 autoHighlight
                 disableClearable
-                inputVariant='outlined'
                 value={currentCity && currentCity.value}
                 inputValue={currentCity && currentCity.inputValue}
                 getOptionLabel={(option) => option.LocalizedName || ''}

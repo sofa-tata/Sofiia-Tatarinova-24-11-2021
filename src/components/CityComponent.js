@@ -6,14 +6,14 @@ function CityComponent(props) {
   const { city } = props;
   const classes = useStyles();
   return (
-    <Grid container className={classes.cityContainer}>
-      <Grid item>
-        <Typography>{city.name}</Typography>
+      <Grid container className={classes.cityContainer} justifyContent='center'>
+        <Grid item xs={10}>
+          <Typography className={classes.centerText}>{city.name}</Typography>
+        </Grid>
+        <Grid item xs={10}>
+          <Typography className={classes.centerText}>{`${city.weather} °C`}</Typography>
+        </Grid>
       </Grid>
-      <Grid item>
-        <Typography>{`${city.weather} °C`}</Typography>
-      </Grid>
-    </Grid>
   );
 }
 

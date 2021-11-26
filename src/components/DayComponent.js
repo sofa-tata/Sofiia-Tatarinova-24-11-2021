@@ -10,7 +10,7 @@ function DayComponent(props) {
     <Grid
       container
       justifyContent='center'
-      alignItens='center'
+      alignItems='center'
       className={classes.dayContainer}
     >
       <Grid item xs={10}>

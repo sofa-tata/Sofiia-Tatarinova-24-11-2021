@@ -43,9 +43,9 @@ export const getCitiesOptions = (typedValue) => async (dispatch) => {
         // const res = await axios.get(`${BASE_URL}${END_POINT.CITIES}`, {params: { apikey: API_KEY, q: typedValue }});
         const res = cities
         console.log('cities', res)
-        // if(res.status === 200){                 
-            await dispatch(setCitiesOptions(res));
-        // }    
+        if(res.status === 200 && res.data.length){                 
+             dispatch(setCitiesOptions(res.data));
+        }    
       } catch(error) {
         dispatch(actionSnackbar.setSnackbar({type: 'error', message: error.message, timeout: 3000}));
       }   
@@ -56,9 +56,9 @@ export const getCurrentWeather = (locationKey) => async (dispatch) => {
     try {
         // const res = await axios.get(`${BASE_URL}${END_POINT.CURRENT_WEATHER}/${locationKey}`, {params: { apikey: API_KEY }});
         const res = currentWeather
-        console.log('currentWeather', res[0])
+        console.log('currentWeather', res)
         // if(res.status === 200){                 
-            await dispatch(setCurrentWeather(res[0]));
+             dispatch(setCurrentWeather(res.data[0]));
         // }    
       } catch(error) {
         dispatch(actionSnackbar.setSnackbar({type: 'error', message: error.message, timeout: 3000}));
@@ -72,9 +72,9 @@ export const getFiveDaysForecast = (locationKey) => async (dispatch) => {
         // const res = await axios.get(`${BASE_URL}${END_POINT.FIVE_DAYS}/${locationKey}`, {params: { apikey: API_KEY, metric: true }});
         const res = fiveDaysForecast
         console.log('fiveDaysForecast', res)
-        // if(res.status === 200){                 
-            await dispatch(setFiveDaysForecast(res.DailyForecasts));
-        // }    
+        if(res.status === 200){                 
+             dispatch(setFiveDaysForecast(res.data.DailyForecasts));
+        }    
       } catch(error) {
         dispatch(actionSnackbar.setSnackbar({type: 'error', message: error.message, timeout: 3000}));
       }
