@@ -24,11 +24,13 @@ function FavoritesPage() {
     // dispatch(mainAction.getFiveDaysForecast(id))
   };
 
-  return favorites.length ? (
+  return (
     <Grid container justifyContent='center'>
       <Grid item xs={10} sm={8}>
         <Grid container className={classes.citiesContainer}>
-          <Grid item xs={12}>
+          {favorites.length ? 
+          <>
+                    <Grid item xs={12}>
             <Typography className={classes.yourFavorite}>
               Weather in your favorite cities:{' '}
             </Typography>
@@ -48,19 +50,25 @@ function FavoritesPage() {
               ))}
             </Grid>
           </Grid>
+          </>
+          :
+          <Grid item>
+          <Typography className={classes.noLocations}>You don't have saved locations yet.</Typography>
+        </Grid>}
+
         </Grid>
       </Grid>
     </Grid>
-  ) : (
-    <Grid
-      container
-      justifyContent='center'
-      className={classes.noLocationsContainer}
-    >
-      <Grid item>
-        <Typography>You don't have saved locations yet.</Typography>
-      </Grid>
-    </Grid>
+  // ) : (
+  //   <Grid
+  //     container
+  //     justifyContent='center'
+  //     className={classes.noLocationsContainer}
+  //   >
+  //     <Grid item>
+  //       <Typography>You don't have saved locations yet.</Typography>
+  //     </Grid>
+  //   </Grid>
   );
 }
 

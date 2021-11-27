@@ -30,7 +30,8 @@ export const useStyles = makeStyles((theme) => ({
       marginTop: '50px'
     },
     mainWeatherText: {
-      fontSize: '40px'
+      fontSize: '40px',
+      color: theme.palette.text.main
     },
     mainWeatherTextContainer: {
       marginTop: '60px'
@@ -41,35 +42,41 @@ export const useStyles = makeStyles((theme) => ({
     },
     temperatureValue: {
       fontSize: '22px',
-      fontWeight: 600
+      fontWeight: 600,
+      color: theme.palette.text.main
     },
     locationName: {
       fontSize: '22px',
-      fontWeight: 600
+      fontWeight: 600,
+      color: theme.palette.text.main
     },
     mainContent: {
-      backgroundColor: 'pink',
+      // backgroundColor: 'pink',
       padding: '15px',
       borderRadius: '4px'
     },
+    heart: {
+      // fill: theme.palette.button.heart
+    }
     
   }));
 
   export const CustomizedToggleButton = withStyles((theme) => ({
     root: {
-      backgroundColor: 'rgb(255,192,203, .4)',
-      color: '#000000',
+      backgroundColor: 'transparent',
+      border: 'none',
+      color: theme.palette.text.main,
       textTransform: 'none',
       '&:hover': {
-        backgroundColor: 'rgb(255,192,203, .5)',
+        backgroundColor: theme.palette.button.toggleSelectedHover,
         transition: '.3s'
       },
       '&.MuiToggleButton-root.Mui-selected': {
-        backgroundColor: 'rgb(255,255,255, .6)',
-      color: '#000000',
+        backgroundColor: 'transparent',
+      color: theme.palette.text.main,
       textTransform: 'none',
       '&:hover': {
-        backgroundColor: 'rgb(255,255,255)',
+        backgroundColor: theme.palette.button.toggleSelectedHover,
         transition: '.3s'
       }
       }

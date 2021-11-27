@@ -1,14 +1,15 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     dayContainer: {
-        backgroundColor: 'rgba(243, 225, 107, .8)',
+        backgroundColor: theme.palette.background.day,
         borderRadius: '4px',
         padding: '40px 15px',
         boxShadow: '0px 2px 4px -1px rgb(0, 0, 0, 0.2)',
     },
-    centerText: {
-        textAlign: 'center'
+    dayText: {
+        textAlign: 'center',
+        color: theme.palette.text.day
     }
   }));

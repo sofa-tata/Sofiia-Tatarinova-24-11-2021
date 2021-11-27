@@ -10,7 +10,7 @@ import * as actionSnackbar from '../snackbar/snackbarSlice';
 export const mainSlice = createSlice({
     name: 'main',
     initialState: {
-      themeMode: 'dark',
+      themeMode: 'light',
       citiesOptions: [],
       currentCity: {
         value: null,
@@ -32,6 +32,9 @@ export const mainSlice = createSlice({
       },
       setFiveDaysForecast: (state, action) => {
           state.fiveDaysForecast = action.payload;
+      },
+      setThemeMode: (state, action) => {
+        state.themeMode = action.payload;
       }
       
     }
@@ -106,6 +109,6 @@ export const getFiveDaysForecast = (locationKey) => async (dispatch) => {
     
   };
   
-  export const { setCitiesOptions, setCurrentCity, setCurrentWeather, setFiveDaysForecast } = mainSlice.actions;
+  export const { setCitiesOptions, setCurrentCity, setCurrentWeather, setFiveDaysForecast, setThemeMode } = mainSlice.actions;
   
   export default mainSlice.reducer;

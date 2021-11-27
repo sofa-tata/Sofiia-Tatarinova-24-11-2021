@@ -108,13 +108,12 @@ function WeatherPage() {
                   <Grid container justifyContent='flex-end'>
                     <Grid item>
                       <CustomizedToggleButton
-                        value='check'
                         selected={isCurrentCityInFav}
                         onChange={handleChange}
                       >
                         {isCurrentCityInFav ? (
                           <>
-                          <FavoriteIcon style={{ fill: 'pink' }}/>
+                          <FavoriteIcon className={classes.heart}/>
                           {md && <Typography>&nbsp;&nbsp;In favorites</Typography>}
                           </>
                         ) : (

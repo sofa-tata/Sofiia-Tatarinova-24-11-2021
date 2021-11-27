@@ -13,13 +13,14 @@ import Clear from './assets/images/andrej-chudy-clear.jpg';
 import Rainy from './assets/images/kumiko-shimizu-rainy.jpg';
 import Cloudy from './assets/images/harmen-jelle-van-mourik-cloudy.jpg';
 import Snow from './assets/images/fabian-mardi-snow.jpg';
-import SunnyDark from './assets/images/tim-marshall-sunny-dark.jpg';
+import SunnyDark from './assets/images/irina-iriser-sunny-dark.jpg';
 import ClearDark from './assets/images/kai-pilger-clear-dark.jpg';
-import RainyDark from './assets/images/tam-dv-rainy-dark.jpg';
+import RainyDark from './assets/images/anna-atkins-rainy-dark.jpg';
 import CloudyDark from './assets/images/samuel-bryngelsson-cloudy-dark.jpg';
 import SnowDark from './assets/images/nathan-fertig-snow-dark.jpg';
+import FavBG from './assets/images/fakurian-design-fav.jpg';
+import FavBGDark from './assets/images/brennan-burling-fav-dark.jpg';
 import { useSelector, useDispatch } from 'react-redux';
-import clsx from 'clsx';
 import * as mainAction from './redux/main/mainSlice';
 import { API_KEY, BASE_URL, END_POINT } from './utils/constants';
 import * as actionSnackbar from './redux/snackbar/snackbarSlice';
@@ -76,8 +77,15 @@ function App() {
     getOptions()
   }, [])
 
-  const generateBackGroundImage = (weatherText, themeMode) => {
-    if (themeMode === 'light') {
+  const generateBackGroundImage = (weatherText, themeMode, pathname) => {
+    if (pathname === '/favorites') {
+      if (themeMode === 'light') {
+        return `url(${FavBG})`;
+      } else {
+        return `url(${FavBGDark})`;
+      }
+    } else {
+      if (themeMode === 'light') {
       if (weatherText.toUpperCase().includes('SUN')) {
         console.log('SUN');
         return `url(${Sunny})`;
@@ -112,24 +120,24 @@ function App() {
         return `url(${ClearDark})`;
       }
     }
+    }
+    
     
   };
 
   const styleProps = {
-    // backgroundImage: currentWeather ? generateBackGroundImage('snow', themeMode) : generateBackGroundImage('', themeMode)
+    backgroundImage: currentWeather ? generateBackGroundImage('clear', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
 
-    backgroundImage:
-      currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode) : generateBackGroundImage('', themeMode)
+    // backgroundImage:
+    //   currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode) : generateBackGroundImage('', themeMode)
   };
   const classes = useStyles(styleProps);
 
   return (
     <ThemeProvider theme={mainTheme}>
       <div 
-      className={clsx({
-        [classes.mainContainer]: location.pathname !== '/favorites',
+      className={classes.mainContainer}
         // ['wrapper']: location.pathname !== '/favorites'
-      })}
         >
         <TopBar />
         <CustomizedSnackbar />

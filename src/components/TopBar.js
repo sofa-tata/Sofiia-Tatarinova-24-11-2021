@@ -5,22 +5,31 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  ListItem,
   SwipeableDrawer
 } from '@material-ui/core';
 import { Link, useLocation } from 'react-router-dom';
-import { useStyles } from '../utils/styles/TopBarStyles';
+import { useStyles, DarkModeToggleButton } from '../utils/styles/TopBarStyles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import clsx from 'clsx';
+import Brightness3Icon from '@material-ui/icons/Brightness3';
+import { useSelector, useDispatch } from 'react-redux';
+import * as mainAction from '../redux/main/mainSlice';
 
 function TopBar() {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const theme = useTheme()
   const xs = useMediaQuery(theme.breakpoints.down('sm'))
   const [menuState, setMenuState] = useState(false);
   const location = useLocation()
+  const themeMode = useSelector((state) => state.main.themeMode);
+
+  const toggleThemeMode = () => {
+    const newMode = themeMode === 'light'? 'dark' : 'light'
+    dispatch(mainAction.setThemeMode(newMode))
+  }
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -38,7 +47,7 @@ function TopBar() {
           <AppBar position='sticky' className={classes.header}>
       <Toolbar>
         <Grid container justifyContent='space-between' alignItems='center'>
-          <Grid item xs={8}>
+          <Grid item sm={4}>
             <Link to={'/home'} className={classes.link}>
               <Typography variant='h6' className={classes.title}>
                 Herolo Weather Task
@@ -46,14 +55,27 @@ function TopBar() {
             </Link>
           </Grid>
           <Grid item xs={4}>
-            <Grid container justifyContent='flex-end'>
+            <Grid container justifyContent='flex-end' alignItems='center'>
               <Grid item xs={4}>
-                <Link to={'/home'} className={classes.link}>
+                <DarkModeToggleButton
+                        selected={themeMode === 'dark'}
+                        onChange={toggleThemeMode}>
+                  <Brightness3Icon className={clsx(classes.darkMode,{
+                    [classes.darkModeSelected]: themeMode === 'dark'
+                  })} />
+                </DarkModeToggleButton>
+              </Grid>
+              <Grid item xs={3}>
+                <Link to={'/home'} className={clsx(classes.link, {
+                  [classes.currentLink]: location.pathname !== '/favorites'
+                })}>
                   <Typography>Home</Typography>
                 </Link>
               </Grid>
-              <Grid item xs={4}>
-                <Link to={'/favorites'} className={classes.link}>
+              <Grid item xs={3}>
+                <Link to={'/favorites'} className={clsx(classes.link, {
+                  [classes.currentLink]: location.pathname === '/favorites'
+                })}>
                   <Typography>Favorites</Typography>
                 </Link>
               </Grid>
@@ -69,12 +91,14 @@ function TopBar() {
     return (
       <>
       <Link to='/home' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
-        [classes.currentPageLink]: location.pathname !== '/favorites'
+        [classes.currentPageLinkMobile]: location.pathname !== '/favorites',
+        [classes.pageLinkMobileHover]: location.pathname === '/favorites'
       })}>
         HOME
       </Link>
       <Link to='/favorites' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
-        [classes.currentPageLink]: location.pathname === '/favorites'
+        [classes.currentPageLinkMobile]: location.pathname === '/favorites',
+        [classes.pageLinkMobileHover]: location.pathname !== '/favorites'
       })}>FAVORITES</Link>
       </>
     )
@@ -85,6 +109,12 @@ function TopBar() {
       <AppBar position='fixed' className={classes.mobileTopBar} elevation={0}>
       <Grid container direction='row' alignItems='center' justifyContent='flex-end'>
           <>
+          <DarkModeToggleButton className={classes.mobileDark} selected={themeMode === 'dark'}
+                        onChange={toggleThemeMode}>
+            <Brightness3Icon className={clsx(classes.darkMode,{
+                    [classes.darkModeSelected]: themeMode === 'dark'
+                  })} />
+          </DarkModeToggleButton>
               <IconButton  
                 aria-label="menu" 
                 onClick={toggleDrawer(true)} 

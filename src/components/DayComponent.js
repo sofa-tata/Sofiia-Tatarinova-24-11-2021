@@ -14,13 +14,13 @@ function DayComponent(props) {
       className={classes.dayContainer}
     >
       <Grid item xs={10}>
-        <Typography className={classes.centerText}>
+        <Typography className={classes.dayText}>
           {format(new Date(day.Date), 'EEEE')}
         </Typography>
       </Grid>
       <Grid item xs={10}>
         <Typography
-        className={classes.centerText}
+        className={classes.dayText}
         >{`${day.Temperature.Minimum.Value}° / ${day.Temperature.Maximum.Value}°`}</Typography>
       </Grid>
     </Grid>

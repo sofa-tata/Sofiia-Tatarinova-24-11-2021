@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import SearchIcon from '@material-ui/icons/Search';
-import { Grid, TextField, InputAdornment, IconButton} from '@material-ui/core';
+import {  TextField} from '@material-ui/core';
 import { CustomizedAutocomplete } from '../utils/styles/SearchStyles';
 import * as mainAction from '../redux/main/mainSlice';
 import { useSelector, useDispatch } from 'react-redux';
+import { useStyles } from '../utils/styles/SearchStyles';
 
 function Search() {
-  // const classes = useStyles();
+  const classes = useStyles();
   const dispatch = useDispatch();
   const citiesOptions = useSelector(state => state.main.citiesOptions);
   const currentCity = useSelector(state => state.main.currentCity);
-
 
 
   useEffect(() => {
@@ -71,7 +71,7 @@ function Search() {
                       InputProps={{
                         ...params.InputProps,
                         startAdornment: (
-                              <SearchIcon />
+                              <SearchIcon className={classes.search}/>
                         ),
                       }}
                     />
