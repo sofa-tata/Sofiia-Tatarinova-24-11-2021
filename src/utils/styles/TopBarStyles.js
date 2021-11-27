@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
     menuLink: {
       textDecoration: 'none',
       color: '#000000',
-      padding: '20px'
+      padding: '20px 45px 20px 20px'
     },
     menuButton: {
       padding: '10px',
@@ -27,7 +27,8 @@ export const useStyles = makeStyles((theme) => ({
       minWidth: '50px'
     },
     mobileTopBar: {
-      backgroundColor: '#FFFFFF'
+      backgroundColor: '#FFFFFF',
+      boxShadow: '0px 2px 4px -1px rgb(0, 0, 0, 0.2)'
     },
     currentPageLink: {
       backgroundColor: 'rgba(243, 225, 107, .8)'

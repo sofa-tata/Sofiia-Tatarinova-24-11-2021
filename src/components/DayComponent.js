@@ -21,7 +21,7 @@ function DayComponent(props) {
       <Grid item xs={10}>
         <Typography
         className={classes.centerText}
-        >{`${day.Temperature.Maximum.Value} °C`}</Typography>
+        >{`${day.Temperature.Minimum.Value}° / ${day.Temperature.Maximum.Value}°`}</Typography>
       </Grid>
     </Grid>
   );

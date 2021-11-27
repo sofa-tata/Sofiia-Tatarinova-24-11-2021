@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     mainContainer: {
       backgroundImage: props => props.backgroundImage,
       backgroundRepeat: "no-repeat",
@@ -18,8 +18,11 @@ export const useStyles = makeStyles(() => ({
       minHeight: '100vh'
     },
     searchContainer: {
-      marginTop: '5vh',
-      maxHeight: '30px'
+      marginTop: '7vh',
+      maxHeight: '30px',
+      [theme.breakpoints.down('sm')]: {
+        marginTop: '12vh'
+      },
     },
     cityAndFavContainer: {
       marginTop: '50px'

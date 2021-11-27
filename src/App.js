@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import './App.css';
+import axios from 'axios'
 import WeatherPage from './pages/WeatherPage';
 import FavoritesPage from './pages/FavoritesPage';
 import TopBar from './components/TopBar';
@@ -14,10 +15,16 @@ import Cloudy from './assets/images/harmen-jelle-van-mourik-cloudy.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import clsx from 'clsx';
 import * as mainAction from './redux/main/mainSlice';
+import { API_KEY, BASE_URL, END_POINT } from './utils/constants';
+import * as actionSnackbar from './redux/snackbar/snackbarSlice';
+
+const TEL_AVIV_KEY = '215854';
 
 function App() {
   const dispatch = useDispatch()
   const currentWeather = useSelector((state) => state.main.currentWeather);
+  const currentCity = useSelector((state) => state.main.currentCity);
+  const citiesOptions = useSelector(state => state.main.citiesOptions);
   const location = useLocation()
   let mainTheme = createTheme({
     typography: {
@@ -27,11 +34,23 @@ function App() {
       ].join(','),
     }
   });
+  
 
 
   useEffect(() => {
-    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: 'Ankara'}))
-    dispatch(mainAction.getCitiesOptions('Ankara'))
+    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: 'Tel Aviv'}))
+    async function getOptions () {
+      try {
+        const res = await axios.get(`${BASE_URL}${END_POINT.CITIES}`, {params: { apikey: API_KEY, q: 'Tel Aviv' }})
+        if (res.status === 200 && res.data.length) {
+            const newValue = res.data.find(option => option.Key === TEL_AVIV_KEY)
+            dispatch(mainAction.setCurrentCity({key: 'value', value: newValue}))
+        }
+      } catch (error) {
+        dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Something went wrong', timeout: 3000}));
+      }
+      }
+    getOptions()
   }, [])
 
   const generateBackGroundImage = (weatherText) => {

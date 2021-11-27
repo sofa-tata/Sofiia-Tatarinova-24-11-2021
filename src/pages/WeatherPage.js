@@ -9,10 +9,14 @@ import * as favoritesAction from '../redux/favorites/favoritesSlice';
 import * as actionSnackbar from '../redux/snackbar/snackbarSlice';
 import { useStyles } from '../utils/styles/MainStyles';
 import DayComponent from '../components/DayComponent';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 function WeatherPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const theme = useTheme()
+  const md = useMediaQuery(theme.breakpoints.up('md'))
   const currentCity = useSelector((state) => state.main.currentCity);
   const currentWeather = useSelector((state) => state.main.currentWeather);
   const fiveDaysForecast = useSelector((state) => state.main.fiveDaysForecast);
@@ -32,11 +36,8 @@ function WeatherPage() {
 
   const handleChange = () => {
     if (currentCity) {
-      console.log('FAVVV')
       const favoritesCopy = [...favorites];
       if (!isCurrentCityInFav) {
-        console.log('! is in fav')
-        console.log('currentCity', currentCity)
         const newFavorite = { ...currentCity.value,
           // id: currentCity.value.Key,
           // name: currentCity.inputValue,
@@ -66,7 +67,7 @@ function WeatherPage() {
     <Grid container justifyContent='center'>
       <Grid item xs={12}>
         <Grid container justifyContent='center'>
-          <Grid item xs={11} sm={2} className={classes.searchContainer}>
+          <Grid item xs={10} sm={6} md={4} lg={2} className={classes.searchContainer}>
             <Search />
           </Grid>
         </Grid>
@@ -110,12 +111,12 @@ function WeatherPage() {
                         {isCurrentCityInFav ? (
                           <>
                           <FavoriteIcon style={{ fill: 'pink' }}/>
-                          <Typography>&nbsp;&nbsp;In favorites</Typography>
+                          {md && <Typography>&nbsp;&nbsp;In favorites</Typography>}
                           </>
                         ) : (
                           <>
                           <FavoriteBorderIcon />
-                          <Typography>&nbsp;&nbsp;Add to favorites</Typography>
+                          {md && <Typography>&nbsp;&nbsp;Add to favorites</Typography>}
                           </>
                         )}
                         
@@ -141,12 +142,12 @@ function WeatherPage() {
             <Grid item xs={12}>
               <Grid
                 container
-                justifyContent='space-between'
+                justifyContent='center'
                 className={classes.daysContainer}
                 spacing={1}
               >
                 {fiveDaysForecast.map((day, index) => (
-                  <Grid item xs={12} sm={2} key={index}>
+                  <Grid item xs={12} sm={12} md={8} lg={2} key={index}>
                     <DayComponent day={day} />
                   </Grid>
                 ))}
