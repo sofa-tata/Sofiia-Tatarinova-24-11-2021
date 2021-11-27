@@ -10,14 +10,16 @@ export const useStyles = makeStyles((theme) => ({
         fontSize: '36px',
         color: theme.palette.text.main,
         textAlign: 'center',
+        marginTop: '2vh',
         [theme.breakpoints.down('sm')]: {
             fontSize: '22px',
+            marginTop: '12vh',
         }
     },
     citiesContainer: {
         marginTop: '18vh',
         [theme.breakpoints.down('sm')]: {
-            marginTop: '9vh',
+            marginTop: '12vh',
         }
     },
     link: {
@@ -28,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.text.main,
         textAlign: 'center',
         fontSize: '36px',
-        marginBottom: '2vh',
+        marginBottom: '4vh',
         [theme.breakpoints.down('sm')]: {
             fontSize: '22px',
           },

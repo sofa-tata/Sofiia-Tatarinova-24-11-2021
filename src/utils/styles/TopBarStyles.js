@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
       textDecoration: 'none',
       color: theme.palette.text.main,
       '&:hover': {
-        color: theme.palette.text.yellow,
+        color: theme.palette.text.menu,
         transition: '.3s'
       }
     },
@@ -25,12 +25,16 @@ export const useStyles = makeStyles((theme) => ({
       padding: '20px 45px 20px 20px',
       
     },
-    pageLinkMobileHover: {
-      '&:hover': {
-        color: theme.palette.text.yellow,
-        transition: '.3s'
-      }
+    menuIcon: {
+      fontSize: 30,
+      fill: theme.palette.text.main
     },
+    // pageLinkMobileHover: {
+    //   '&:hover': {
+    //     color: theme.palette.text.menu,
+    //     transition: '.3s'
+    //   }
+    // },
     menuButton: {
       padding: '10px',
       marginRight: '20px'
@@ -43,7 +47,7 @@ export const useStyles = makeStyles((theme) => ({
       boxShadow: '0px 2px 4px -1px rgb(0, 0, 0, 0.2)'
     },
     currentPageLinkMobile: {
-      backgroundColor: theme.palette.text.yellow
+      backgroundColor: theme.palette.text.menu
     },
     mobileDark: {
       marginRight: '20px'
@@ -55,7 +59,8 @@ export const useStyles = makeStyles((theme) => ({
       fill: theme.palette.text.yellow
     },
     currentLink: {
-      color: theme.palette.text.yellow
+      // color: theme.palette.text.menu
+      fontWeight: 600
     }
   }));
 

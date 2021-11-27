@@ -52,7 +52,7 @@ function FavoritesPage() {
           </Grid>
           </>
           :
-          <Grid item>
+          <Grid item xs={12}>
           <Typography className={classes.noLocations}>You don't have saved locations yet.</Typography>
         </Grid>}
 

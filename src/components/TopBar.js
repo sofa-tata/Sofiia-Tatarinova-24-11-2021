@@ -66,17 +66,17 @@ function TopBar() {
                 </DarkModeToggleButton>
               </Grid>
               <Grid item xs={3}>
-                <Link to={'/home'} className={clsx(classes.link, {
+                <Link to={'/home'} className={classes.link}>
+                  <Typography className={clsx({
                   [classes.currentLink]: location.pathname !== '/favorites'
-                })}>
-                  <Typography>Home</Typography>
+                })}>Home</Typography>
                 </Link>
               </Grid>
               <Grid item xs={3}>
-                <Link to={'/favorites'} className={clsx(classes.link, {
+                <Link to={'/favorites'} className={classes.link}>
+                  <Typography className={clsx({
                   [classes.currentLink]: location.pathname === '/favorites'
-                })}>
-                  <Typography>Favorites</Typography>
+                })}>Favorites</Typography>
                 </Link>
               </Grid>
             </Grid>
@@ -92,13 +92,13 @@ function TopBar() {
       <>
       <Link to='/home' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
         [classes.currentPageLinkMobile]: location.pathname !== '/favorites',
-        [classes.pageLinkMobileHover]: location.pathname === '/favorites'
+        // [classes.pageLinkMobileHover]: location.pathname === '/favorites'
       })}>
         HOME
       </Link>
       <Link to='/favorites' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
         [classes.currentPageLinkMobile]: location.pathname === '/favorites',
-        [classes.pageLinkMobileHover]: location.pathname !== '/favorites'
+        // [classes.pageLinkMobileHover]: location.pathname !== '/favorites'
       })}>FAVORITES</Link>
       </>
     )
@@ -120,7 +120,7 @@ function TopBar() {
                 onClick={toggleDrawer(true)} 
                 className={classes.menuButton}
               >
-                <MenuIcon style={{ fontSize: 30 }} />
+                <MenuIcon className={classes.menuIcon} />
               </IconButton>
             <SwipeableDrawer
               anchor='right'

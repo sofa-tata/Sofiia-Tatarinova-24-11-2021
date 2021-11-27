@@ -12,7 +12,14 @@ export const useStyles = makeStyles((theme) => ({
             transition: '.3s'
         }
     },
-    centerText: {
-        textAlign: 'center'
+    cityText: {
+        fontWeight: 600,
+        textAlign: 'center',
+        marginBottom: '20px',
+        color: theme.palette.text.day
+    },
+    cityWeather: {
+        textAlign: 'center',
+        color: theme.palette.text.day
     }
   }));

@@ -10,6 +10,12 @@ export const useStyles = makeStyles((theme) => ({
     },
     dayText: {
         textAlign: 'center',
+        color: theme.palette.text.day,
+        marginBottom: '20px',
+        fontWeight: 600
+    },
+    dayWeather: {
+        textAlign: 'center',
         color: theme.palette.text.day
     }
   }));

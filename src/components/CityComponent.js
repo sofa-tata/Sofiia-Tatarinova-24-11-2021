@@ -12,10 +12,10 @@ function CityComponent(props) {
   return (
       <Grid container className={classes.cityContainer} justifyContent='center'>
         <Grid item xs={10}>
-          <Typography className={classes.centerText}>{city.LocalizedName.length > 17 && lg ? `${city.LocalizedName.slice(0,17)}...` : city.LocalizedName}</Typography>
+          <Typography className={classes.cityText}>{city.LocalizedName.length > 17 && lg ? `${city.LocalizedName.slice(0,17)}...` : city.LocalizedName}</Typography>
         </Grid>
         <Grid item xs={10}>
-          <Typography className={classes.centerText}>{`${city.weather} °C`}</Typography>
+          <Typography className={classes.cityWeather}>{`${city.weather} °C`}</Typography>
         </Grid>
       </Grid>
   );
