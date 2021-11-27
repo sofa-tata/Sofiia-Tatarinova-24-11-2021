@@ -13,8 +13,10 @@ import Rainy from './assets/images/jessica-knowlden-rainy.jpg';
 import Cloudy from './assets/images/harmen-jelle-van-mourik-cloudy.jpg';
 import { useSelector, useDispatch } from 'react-redux';
 import clsx from 'clsx';
+import * as mainAction from './redux/main/mainSlice';
 
 function App() {
+  const dispatch = useDispatch()
   const currentWeather = useSelector((state) => state.main.currentWeather);
   const location = useLocation()
   let mainTheme = createTheme({
@@ -25,6 +27,12 @@ function App() {
       ].join(','),
     }
   });
+
+
+  useEffect(() => {
+    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: 'Ankara'}))
+    dispatch(mainAction.getCitiesOptions('Ankara'))
+  }, [])
 
   const generateBackGroundImage = (weatherText) => {
     if (weatherText.toUpperCase().includes('SUN')) {
@@ -51,8 +59,12 @@ function App() {
 
   return (
     <ThemeProvider theme={mainTheme}>
-      <div className={clsx({
-        [classes.mainContainer]: location.pathname !== '/favorites'})}>
+      <div 
+      className={clsx({
+        [classes.mainContainer]: location.pathname !== '/favorites',
+        // ['wrapper']: location.pathname !== '/favorites'
+      })}
+        >
         <TopBar />
         <CustomizedSnackbar />
         <Switch>

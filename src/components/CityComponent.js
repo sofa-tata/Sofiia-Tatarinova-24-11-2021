@@ -8,7 +8,7 @@ function CityComponent(props) {
   return (
       <Grid container className={classes.cityContainer} justifyContent='center'>
         <Grid item xs={10}>
-          <Typography className={classes.centerText}>{city.name}</Typography>
+          <Typography className={classes.centerText}>{city.LocalizedName}</Typography>
         </Grid>
         <Grid item xs={10}>
           <Typography className={classes.centerText}>{`${city.weather} °C`}</Typography>

@@ -7,7 +7,7 @@ export const snackbarSlice = createSlice({
         visible: false,
         timeout: 3000,
         message: '',
-        type: 'success'
+        type: 'error'
     },
     reducers: {
       turnOnSnackbar: (state, action) => {
@@ -17,6 +17,7 @@ export const snackbarSlice = createSlice({
         state.type = action.payload.type;
       },
       turnOffSnackbar: (state) => {
+        console.log('turnOffSnackbar')
           state.visible = false;
       }
       
@@ -26,7 +27,8 @@ export const snackbarSlice = createSlice({
 let timeoutInstance = null;
 
 export const disableSnackbar = () => (dispatch) => {
-    dispatch(turnOffSnackbar);
+  console.log('disableSnackbar')
+    dispatch(turnOffSnackbar());
     clearTimeout(timeoutInstance);
   };
   

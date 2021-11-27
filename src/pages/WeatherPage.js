@@ -6,6 +6,7 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useSelector, useDispatch } from 'react-redux';
 import * as favoritesAction from '../redux/favorites/favoritesSlice';
+import * as actionSnackbar from '../redux/snackbar/snackbarSlice';
 import { useStyles } from '../utils/styles/MainStyles';
 import DayComponent from '../components/DayComponent';
 
@@ -20,8 +21,9 @@ function WeatherPage() {
 
   useEffect(() => {
     if (currentCity.value) {
+      console.log('yseeffect')
       const isInFav = favorites.some(
-        (element) => element.id === currentCity.value.Key
+        (element) => element.Key === currentCity.value.Key
       );
       setIsCurrentCityInFav(isInFav);
     }
@@ -30,17 +32,20 @@ function WeatherPage() {
 
   const handleChange = () => {
     if (currentCity) {
+      console.log('FAVVV')
       const favoritesCopy = [...favorites];
       if (!isCurrentCityInFav) {
-        const newFavorite = {
-          id: currentCity.value.Key,
-          name: currentCity.inputValue,
+        console.log('! is in fav')
+        console.log('currentCity', currentCity)
+        const newFavorite = { ...currentCity.value,
+          // id: currentCity.value.Key,
+          // name: currentCity.inputValue,
           weather: currentWeather.Temperature.Metric.Value
         };
         favoritesCopy.push(newFavorite);
       } else {
         const indexOfRemoved = favoritesCopy.findIndex(
-          (element) => element.id === currentCity.Key
+          (element) => element.Key === currentCity.value.Key
         );
         favoritesCopy.splice(indexOfRemoved, 1);
       }

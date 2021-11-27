@@ -13,5 +13,23 @@ export const useStyles = makeStyles((theme) => ({
     link: {
       textDecoration: 'none',
       color: '#000000'
+    },
+    menuLink: {
+      textDecoration: 'none',
+      color: '#000000',
+      padding: '20px'
+    },
+    menuButton: {
+      padding: '10px',
+      marginRight: '20px'
+    },
+    menuDrawer: {
+      minWidth: '50px'
+    },
+    mobileTopBar: {
+      backgroundColor: '#FFFFFF'
+    },
+    currentPageLink: {
+      backgroundColor: 'rgba(243, 225, 107, .8)'
     }
   }));

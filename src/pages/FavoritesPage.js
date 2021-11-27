@@ -11,10 +11,13 @@ function FavoritesPage() {
   const dispatch = useDispatch()
   const favorites = useSelector((state) => state.favorites.favorites);
 
-  const openFavoriteCity = (id) => {
-    
-    dispatch(mainAction.getCurrentWeather(id))
-    dispatch(mainAction.getFiveDaysForecast(id))
+  const openFavoriteCity = (city, name) => {
+    console.log('openFavoriteCity called')
+    dispatch(mainAction.getCitiesOptions(name))
+    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: name}))
+    dispatch(mainAction.setCurrentCity({key: 'value', value: city}))
+    // dispatch(mainAction.getCurrentWeather(id))
+    // dispatch(mainAction.getFiveDaysForecast(id))
   }
 
   return favorites.length ? (
@@ -22,8 +25,8 @@ function FavoritesPage() {
       <Grid item xs={10} sm={8}>
         <Grid container className={classes.citiesContainer} spacing={1}>
           {favorites.map((city, index) => (
-            <Grid item xs={2} key={index}>
-              <Link to='/home' className={classes.link} onClick={() => openFavoriteCity(city.id)}>
+            <Grid item xs={11} sm={11} md={3} key={index}>
+              <Link to='/home' className={classes.link} onClick={() => openFavoriteCity(city, city.name)}>
                 <CityComponent city={city} />
               </Link>
             </Grid>

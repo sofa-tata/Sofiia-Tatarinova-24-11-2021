@@ -11,6 +11,8 @@ function Search() {
   const citiesOptions = useSelector(state => state.main.citiesOptions);
   const currentCity = useSelector(state => state.main.currentCity);
 
+
+
   useEffect(() => {
     if (currentCity.value) {
       dispatch(mainAction.getCurrentWeather(currentCity.value.Key))
@@ -42,8 +44,8 @@ function Search() {
                 options={citiesOptions}
                 autoHighlight
                 disableClearable
-                value={currentCity && currentCity.value}
-                inputValue={currentCity && currentCity.inputValue}
+                value={currentCity.value}
+                inputValue={currentCity.inputValue || ''}
                 getOptionLabel={(option) => option.LocalizedName || ''}
                 getOptionSelected={(option, value) =>
                   option.name === value

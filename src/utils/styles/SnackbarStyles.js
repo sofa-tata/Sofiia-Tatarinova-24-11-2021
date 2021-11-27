@@ -17,4 +17,10 @@ export const useStyles = makeStyles((theme) => ({
         right: '5%',
       },
     },
+    iconButtonSnack: {
+      height: '20px', width: '20px'
+    },
+    closeIconSnack: {
+        color: '#FFFFFF'
+    }
   }));

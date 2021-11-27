@@ -20,19 +20,19 @@ import { useStyles } from '../utils/styles/SnackbarStyles'
 
   return (
     <Grid container className={classes.root} >
-      <Collapse in={snackBarObj.visible} timeout={400}>
+      <Collapse in={snackBarObj.visible} timeout={600}>
         <Alert
           elevation={4}
           variant="filled"
           severity={snackBarObj.type}
           action={
             <IconButton
-              style={{ height: '20px', width: '20px' }}
+              className={classes.iconButtonSnack}
               elevation={4}
               variant="filled"
               severity={snackBarObj.type}
               onClick={handleClose}>
-              <CloseIcon style={{ color: 'white' }} />
+              <CloseIcon className={classes.closeIconSnack} />
             </IconButton>
           }
         >

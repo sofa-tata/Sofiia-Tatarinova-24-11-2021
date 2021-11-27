@@ -21,6 +21,22 @@ export const CustomizedAutocomplete = withStyles((theme) => ({
       fontSize: 14,
     },
   },
+  listbox: {
+    '&.MuiAutocomplete-listbox': {
+      '&::-webkit-scrollbar': {
+        width: '3px',
+        height: '3px',
+      },
+      '&::-webkit-scrollbar-track': {
+        boxShadow: 'inset 0 0 5px #FFFFFF',
+        borderRadius: '10px',
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: 'grey',
+        borderRadius: '10px',
+      },
+    },
+  },
 }))(Autocomplete);
 
 export const StyledAutoComplete = withStyles((theme) => ({

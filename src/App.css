@@ -1,8 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,600;1,500&display=swap');
-/* body {
-  height: 100%
+ /* body {
+  background-image: url("./assets/images/andrej-chudy-clear.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  height: 100%;
+  background-position: 'center center';
+  background-size: 'cover';
+}  */
+.wrapper {
+  background-repeat: no-repeat;
+  background-size: 'auto';
+  min-height: calc(100vh + 50px);
+  background-attachment: fixed;
+  background-position: 'center';
 }
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -39,4 +51,4 @@
   to {
     transform: rotate(360deg);
   }
-} */
+}  */
