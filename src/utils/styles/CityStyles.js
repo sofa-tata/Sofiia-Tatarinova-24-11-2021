@@ -1,14 +1,14 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     cityContainer: {
-        backgroundColor: 'rgba(0, 0, 255, 0.4)',
+        backgroundColor: theme.palette.background.favorite,
         borderRadius: '4px',
         padding: '20px 15px',
         boxShadow: '0px 2px 4px -1px rgb(0, 0, 0, 0.2)',
         '&:hover': {
-            backgroundColor: 'rgba(0, 0, 255, 0.5)',
+            backgroundColor:  theme.palette.background.favoriteHover,
             transition: '.3s'
         }
     },

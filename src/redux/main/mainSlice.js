@@ -10,6 +10,7 @@ import * as actionSnackbar from '../snackbar/snackbarSlice';
 export const mainSlice = createSlice({
     name: 'main',
     initialState: {
+      themeMode: 'dark',
       citiesOptions: [],
       currentCity: {
         value: null,

@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import Search from '../components/Search';
-import { ToggleButton } from '@material-ui/lab';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useSelector, useDispatch } from 'react-redux';
 import * as favoritesAction from '../redux/favorites/favoritesSlice';
 import * as actionSnackbar from '../redux/snackbar/snackbarSlice';
-import { useStyles } from '../utils/styles/MainStyles';
+import { useStyles, CustomizedToggleButton } from '../utils/styles/MainStyles';
 import DayComponent from '../components/DayComponent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
+import clsx from 'clsx';
 
 function WeatherPage() {
   const classes = useStyles();
@@ -22,6 +22,7 @@ function WeatherPage() {
   const fiveDaysForecast = useSelector((state) => state.main.fiveDaysForecast);
   const favorites = useSelector((state) => state.favorites.favorites);
   const [isCurrentCityInFav, setIsCurrentCityInFav] = useState(false);
+
 
   useEffect(() => {
     if (currentCity.value) {
@@ -72,38 +73,41 @@ function WeatherPage() {
           </Grid>
         </Grid>
       </Grid>
-      {currentCity && currentWeather && fiveDaysForecast.length && (
+      {currentCity.value && currentWeather && fiveDaysForecast.length && (
         <Grid item xs={10} sm={8}>
           <Grid container justifyContent='center'>
+
             <Grid item xs={12}>
-              <Grid container className={classes.cityAndFavContainer}>
-                <Grid item xs={6}>
-                  <Grid container justifyContent='flex-start'>
-                    <Grid item xs={6}>
-                      <Grid container>
+              <Grid container className={classes.cityAndFavContainer} justifyContent='space-between'>
+
+                {/* <Grid item xs={6}>
+                  <Grid container justifyContent='flex-start'> */}
+                    {/* <Grid item xs={6}>
+                      <Grid container> */}
                         {/* <Grid item>
                 IMAGE?
               </Grid> */}
-                        <Grid item>
-                          <Grid container alignItems='center'>
+                        <Grid item xs={6} md={4} lg={2}>
+                          <Grid container alignItems='center' className={classes.mainContent}>
                             <Grid item xs={12}>
-                              <Typography>
-                                {currentCity.value?.LocalizedName}
+                              <Typography className={classes.locationName}>
+                                {currentCity.value.LocalizedName}
                               </Typography>
                             </Grid>
                             <Grid item xs={12}>
-                              <Typography>{`${currentWeather.Temperature.Metric.Value} °C`}</Typography>
+                              <Typography className={classes.temperatureValue}>{`${currentWeather.Temperature.Metric.Value} °C`}</Typography>
                             </Grid>
                           </Grid>
                         </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
+                      {/* </Grid>
+                    </Grid> */}
+                  {/* </Grid>
+                </Grid> */}
+
                 <Grid item xs={6}>
                   <Grid container justifyContent='flex-end'>
                     <Grid item>
-                      <ToggleButton
+                      <CustomizedToggleButton
                         value='check'
                         selected={isCurrentCityInFav}
                         onChange={handleChange}
@@ -120,7 +124,7 @@ function WeatherPage() {
                           </>
                         )}
                         
-                      </ToggleButton>
+                      </CustomizedToggleButton>
                     </Grid>
                   </Grid>
                 </Grid>
