@@ -62,6 +62,10 @@ function App() {
 
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(showLocation, errorHandler)
+  }, [])
+
+  useEffect(() => {
     dispatch(mainAction.setCurrentCity({key: 'inputValue', value: 'Tel Aviv'}))
     async function getOptions () {
       try {
@@ -76,6 +80,30 @@ function App() {
       }
     getOptions()
   }, [])
+
+  const showLocation = async (position) => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+    try {
+      const res = await axios.get(`${BASE_URL}${END_POINT.GEOLOCATION}`, {params: { apikey: API_KEY, q: `${latitude},${longitude}`, toplevel: true }})
+      if (res.status === 200) {
+        console.log('res', res)
+          dispatch(mainAction.setCurrentCity({key: 'inputValue', value: res.data.LocalizedName}))
+          dispatch(mainAction.setCurrentCity({key: 'value', value: res.data}))
+      }
+    } catch (error) {
+      dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Something went wrong', timeout: 3000}));
+    }
+ }
+
+ const errorHandler = (err) => {
+    // if(err.code === 1) {
+    //    dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Access is denied!', timeout: 3000}));
+    // } else 
+    if( err.code === 2) {
+       dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Position is unavailable!', timeout: 3000}));
+    } 
+ }
 
   const generateBackGroundImage = (weatherText, themeMode, pathname) => {
     if (pathname === '/favorites') {
