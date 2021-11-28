@@ -25,6 +25,7 @@ import * as mainAction from './redux/main/mainSlice';
 import { API_KEY, BASE_URL, END_POINT } from './utils/constants';
 import * as actionSnackbar from './redux/snackbar/snackbarSlice';
 import { lightThemeColors, darkThemeColors } from './utils/constants';
+import { REPOSITORY_NAME } from './utils/constants';
 
 const TEL_AVIV_KEY = '215854';
 
@@ -40,6 +41,7 @@ function App() {
       fontFamily: ['Montserrat', 'sans-serif'].join(',')
     }
   });
+
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(showLocation, errorHandler);
@@ -119,7 +121,7 @@ function App() {
   };
 
   const generateBackGroundImage = (weatherText, themeMode, pathname) => {
-    if (pathname === '/favorites') {
+    if (pathname === `${REPOSITORY_NAME}/favorites`) {
       if (themeMode === 'light') {
         return `url(${FavBG})`;
       } else {
@@ -177,9 +179,9 @@ function App() {
         <TopBar />
         <CustomizedSnackbar />
         <Switch>
-          <Route exact path='/' component={WeatherPage} />
-          <Route exact path='/home' component={WeatherPage} />
-          <Route exact path='/favorites' component={FavoritesPage} />
+          <Route exact path={`${REPOSITORY_NAME}/`} component={WeatherPage} />
+          <Route exact path={`${REPOSITORY_NAME}/home`} component={WeatherPage} />
+          <Route exact path={`${REPOSITORY_NAME}/favorites`} component={FavoritesPage} />
         </Switch>
       </div>
     </ThemeProvider>
