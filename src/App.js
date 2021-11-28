@@ -154,10 +154,10 @@ function App() {
   };
 
   const styleProps = {
-    backgroundImage: currentWeather ? generateBackGroundImage('sun', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
+    // backgroundImage: currentWeather ? generateBackGroundImage('sun', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
 
-    // backgroundImage:
-    //   currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
+    backgroundImage:
+      currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
   };
   const classes = useStyles(styleProps);
 

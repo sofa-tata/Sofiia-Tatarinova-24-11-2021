@@ -114,12 +114,12 @@ function WeatherPage() {
                         
                       >
                         {isCurrentCityInFav ? (
-                          <Grid container>
+                          <Grid container justifyContent={!md ? 'center': 'flex-start'}>
                           <FavoriteIcon className={`${classes.heart} animate__animated animate__heartBeat`}/>
                           {md && <Typography>&nbsp;&nbsp;In favorites</Typography>}
                           </Grid>
                         ) : (
-                          <Grid container>
+                          <Grid container justifyContent={!md ? 'center': 'flex-start'}>
                           <FavoriteBorderIcon />
                           {md && <Typography>&nbsp;&nbsp;Add to favorites</Typography>}
                           </Grid>
