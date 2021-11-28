@@ -4,12 +4,12 @@ import { Grid, Collapse, IconButton, Typography } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import * as actionSnackbar from '../redux/snackbar/snackbarSlice';
-import { useStyles } from '../utils/styles/SnackbarStyles'
+import { useStyles } from '../utils/styles/SnackbarStyles';
 
- function CustomizedSnackbar () {
+function CustomizedSnackbar() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const snackBarObj = useSelector(state => state.snackbar);
+  const snackBarObj = useSelector((state) => state.snackbar);
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -19,19 +19,20 @@ import { useStyles } from '../utils/styles/SnackbarStyles'
   };
 
   return (
-    <Grid container className={classes.root} >
+    <Grid container className={classes.root}>
       <Collapse in={snackBarObj.visible} timeout={600}>
         <Alert
           elevation={4}
-          variant="filled"
+          variant='filled'
           severity={snackBarObj.type}
           action={
             <IconButton
               className={classes.iconButtonSnack}
               elevation={4}
-              variant="filled"
+              variant='filled'
               severity={snackBarObj.type}
-              onClick={handleClose}>
+              onClick={handleClose}
+            >
               <CloseIcon className={classes.closeIconSnack} />
             </IconButton>
           }
@@ -41,6 +42,6 @@ import { useStyles } from '../utils/styles/SnackbarStyles'
       </Collapse>
     </Grid>
   );
-};
+}
 
 export default CustomizedSnackbar;

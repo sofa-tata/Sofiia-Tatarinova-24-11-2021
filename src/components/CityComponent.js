@@ -7,17 +7,24 @@ import { useTheme } from '@material-ui/core/styles';
 function CityComponent(props) {
   const { city } = props;
   const classes = useStyles();
-  const theme = useTheme()
-  const lg = useMediaQuery(theme.breakpoints.only('lg'))
+  const theme = useTheme();
+  const lg = useMediaQuery(theme.breakpoints.only('lg'));
+  
   return (
-      <Grid container className={classes.cityContainer} justifyContent='center'>
-        <Grid item xs={10}>
-          <Typography className={classes.cityText}>{city.LocalizedName.length > 17 && lg ? `${city.LocalizedName.slice(0,17)}...` : city.LocalizedName}</Typography>
-        </Grid>
-        <Grid item xs={10}>
-          <Typography className={classes.cityWeather}>{`${city.weather} °C`}</Typography>
-        </Grid>
+    <Grid container className={classes.cityContainer} justifyContent='center'>
+      <Grid item xs={10}>
+        <Typography className={classes.cityText}>
+          {city.LocalizedName.length > 17 && lg
+            ? `${city.LocalizedName.slice(0, 17)}...`
+            : city.LocalizedName}
+        </Typography>
       </Grid>
+      <Grid item xs={10}>
+        <Typography
+          className={classes.cityWeather}
+        >{`${city.weather} °C`}</Typography>
+      </Grid>
+    </Grid>
   );
 }
 

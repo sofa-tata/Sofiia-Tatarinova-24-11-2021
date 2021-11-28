@@ -19,22 +19,22 @@ import * as mainAction from '../redux/main/mainSlice';
 
 function TopBar() {
   const classes = useStyles();
-  const dispatch = useDispatch()
-  const theme = useTheme()
-  const xs = useMediaQuery(theme.breakpoints.down('sm'))
+  const dispatch = useDispatch();
+  const theme = useTheme();
+  const xs = useMediaQuery(theme.breakpoints.down('sm'));
   const [menuState, setMenuState] = useState(false);
-  const location = useLocation()
+  const location = useLocation();
   const themeMode = useSelector((state) => state.main.themeMode);
 
   const toggleThemeMode = () => {
-    const newMode = themeMode === 'light'? 'dark' : 'light'
-    dispatch(mainAction.setThemeMode(newMode))
-  }
+    const newMode = themeMode === 'light' ? 'dark' : 'light';
+    dispatch(mainAction.setThemeMode(newMode));
+  };
 
   const toggleDrawer = (open) => (event) => {
     if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
+      event.type === 'keydown' &&
+      (event.key === 'Tab' || event.key === 'Shift')
     ) {
       return;
     }
@@ -44,85 +44,117 @@ function TopBar() {
 
   const renderDesktopTopBar = () => {
     return (
-          <AppBar position='sticky' className={classes.header}>
-      <Toolbar>
-        <Grid container justifyContent='space-between' alignItems='center'>
-          <Grid item sm={4}>
-            <Link to={'/home'} className={classes.link}>
-              <Typography variant='h6' className={classes.title}>
-                Herolo Weather Task
-              </Typography>
-            </Link>
-          </Grid>
-          <Grid item xs={4}>
-            <Grid container justifyContent='flex-end' alignItems='center'>
-              <Grid item xs={4}>
-                <DarkModeToggleButton
-                        value="mode"
-                        selected={themeMode === 'dark'}
-                        onChange={toggleThemeMode}>
-                  <Brightness3Icon className={clsx(classes.darkMode,{
-                    [classes.darkModeSelected]: themeMode === 'dark'
-                  })} />
-                </DarkModeToggleButton>
-              </Grid>
-              <Grid item xs={3}>
-                <Link to={'/home'} className={classes.link}>
-                  <Typography className={clsx({
-                  [classes.currentLink]: location.pathname !== '/favorites'
-                })}>Home</Typography>
-                </Link>
-              </Grid>
-              <Grid item xs={3}>
-                <Link to={'/favorites'} className={classes.link}>
-                  <Typography className={clsx({
-                  [classes.currentLink]: location.pathname === '/favorites'
-                })}>Favorites</Typography>
-                </Link>
+      <AppBar position='sticky' className={classes.header}>
+        <Toolbar>
+          <Grid container justifyContent='space-between' alignItems='center'>
+            <Grid item sm={4}>
+              <Link to={'/home'} className={classes.link}>
+                <Typography variant='h6' className={classes.title}>
+                  Herolo Weather Task
+                </Typography>
+              </Link>
+            </Grid>
+            <Grid item xs={4}>
+              <Grid container justifyContent='flex-end' alignItems='center'>
+                <Grid item xs={4}>
+                  <DarkModeToggleButton
+                    value='mode'
+                    selected={themeMode === 'dark'}
+                    onChange={toggleThemeMode}
+                  >
+                    <Brightness3Icon
+                      className={clsx(classes.darkMode, {
+                        [classes.darkModeSelected]: themeMode === 'dark'
+                      })}
+                    />
+                  </DarkModeToggleButton>
+                </Grid>
+                <Grid item xs={3}>
+                  <Link to={'/home'} className={classes.link}>
+                    <Typography
+                      className={clsx({
+                        [classes.currentLink]:
+                          location.pathname !== '/favorites'
+                      })}
+                    >
+                      Home
+                    </Typography>
+                  </Link>
+                </Grid>
+                <Grid item xs={3}>
+                  <Link to={'/favorites'} className={classes.link}>
+                    <Typography
+                      className={clsx({
+                        [classes.currentLink]:
+                          location.pathname === '/favorites'
+                      })}
+                    >
+                      Favorites
+                    </Typography>
+                  </Link>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
-      </Toolbar>
-    </AppBar>
-    )
-  }
+        </Toolbar>
+      </AppBar>
+    );
+  };
 
   const renderMenuList = () => {
     return (
       <>
-      <Link to='/home' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
-        [classes.currentPageLinkMobile]: location.pathname !== '/favorites',
-        // [classes.pageLinkMobileHover]: location.pathname === '/favorites'
-      })}>
-        HOME
-      </Link>
-      <Link to='/favorites' onClick={toggleDrawer(false)} className={clsx(classes.menuLink, {
-        [classes.currentPageLinkMobile]: location.pathname === '/favorites',
-        // [classes.pageLinkMobileHover]: location.pathname !== '/favorites'
-      })}>FAVORITES</Link>
+        <Link
+          to='/home'
+          onClick={toggleDrawer(false)}
+          className={clsx(classes.menuLink, {
+            [classes.currentPageLinkMobile]: location.pathname !== '/favorites'
+          })}
+        >
+          HOME
+        </Link>
+        <Link
+          to='/favorites'
+          onClick={toggleDrawer(false)}
+          className={clsx(classes.menuLink, {
+            [classes.currentPageLinkMobile]: location.pathname === '/favorites'
+          })}
+        >
+          FAVORITES
+        </Link>
       </>
-    )
-  }
+    );
+  };
 
   const renderMobileTopBar = () => {
     return (
       <AppBar position='fixed' className={classes.mobileTopBar} elevation={0}>
-      <Grid container direction='row' alignItems='center' justifyContent='flex-end'>
+        <Grid
+          container
+          direction='row'
+          alignItems='center'
+          justifyContent='flex-end'
+        >
           <>
-          <DarkModeToggleButton value="mode" className={classes.mobileDark} selected={themeMode === 'dark'}
-                        onChange={toggleThemeMode}>
-            <Brightness3Icon className={clsx(classes.darkMode,{
-                    [classes.darkModeSelected]: themeMode === 'dark'
-                  })} />
-          </DarkModeToggleButton>
-              <IconButton  
-                aria-label="menu" 
-                onClick={toggleDrawer(true)} 
-                className={classes.menuButton}
-              >
-                <MenuIcon className={classes.menuIcon} />
-              </IconButton>
+            <DarkModeToggleButton
+              value='mode'
+              className={classes.mobileDark}
+              selected={themeMode === 'dark'}
+              onChange={toggleThemeMode}
+            >
+              <Brightness3Icon
+                className={clsx(classes.darkMode, {
+                  [classes.darkModeSelected]: themeMode === 'dark'
+                })}
+              />
+            </DarkModeToggleButton>
+            <IconButton
+              aria-label='menu'
+              onClick={toggleDrawer(true)}
+              className={classes.menuButton}
+            >
+              <MenuIcon className={classes.menuIcon} />
+            </IconButton>
             <SwipeableDrawer
               anchor='right'
               open={menuState}
@@ -132,16 +164,12 @@ function TopBar() {
               {renderMenuList()}
             </SwipeableDrawer>
           </>
-      </Grid>
-    </AppBar>
-    )
-  }
+        </Grid>
+      </AppBar>
+    );
+  };
 
-  return (
-    <>
-    {xs ? renderMobileTopBar() : renderDesktopTopBar()}
-    </>
-  )
-};
+  return <>{xs ? renderMobileTopBar() : renderDesktopTopBar()}</>;
+}
 
 export default TopBar;

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Grid, Typography } from '@material-ui/core';
 import { format } from 'date-fns';
 import { useStyles } from '../utils/styles/DayStyles';
@@ -9,23 +9,23 @@ import clsx from 'clsx';
 function DayComponent(props) {
   const { day } = props;
   const classes = useStyles();
-  const [rerendered, setRerendered] = useState(false)
+  const [rerendered, setRerendered] = useState(false);
   const currentCity = useSelector((state) => state.main.currentCity);
 
   useEffect(() => {
-    setRerendered(true)
+    setRerendered(true);
     setTimeout(() => {
-      setRerendered(false)
-    }, 1000)
-  }, [currentCity.value])
-  
+      setRerendered(false);
+    }, 1000);
+  }, [currentCity.value]);
+
   return (
     <Grid
       container
       justifyContent='center'
       alignItems='center'
       className={clsx(classes.dayContainer, 'animate__animated', {
-        'animate__fadeIn': rerendered
+        animate__fadeIn: rerendered
       })}
     >
       <Grid item xs={10}>
@@ -35,7 +35,7 @@ function DayComponent(props) {
       </Grid>
       <Grid item xs={10}>
         <Typography
-        className={classes.dayWeather}
+          className={classes.dayWeather}
         >{`${day.Temperature.Minimum.Value}° / ${day.Temperature.Maximum.Value}°`}</Typography>
       </Grid>
     </Grid>

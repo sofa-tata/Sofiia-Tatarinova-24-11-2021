@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import axios from 'axios'
+import axios from 'axios';
 import WeatherPage from './pages/WeatherPage';
 import FavoritesPage from './pages/FavoritesPage';
 import TopBar from './components/TopBar';
-import { Route, Switch, useLocation  } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import CustomizedSnackbar from './components/Snackbar';
-import { useStyles } from './utils/styles/MainStyles'
+import { useStyles } from './utils/styles/MainStyles';
 import Sunny from './assets/images/glenn-carstens-peters-sunny.jpg';
 import Clear from './assets/images/pexels-scott-webb-clear.jpg';
 import Rainy from './assets/images/kumiko-shimizu-rainy.jpg';
@@ -29,81 +29,94 @@ import { lightThemeColors, darkThemeColors } from './utils/constants';
 const TEL_AVIV_KEY = '215854';
 
 function App() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const currentWeather = useSelector((state) => state.main.currentWeather);
   const themeMode = useSelector((state) => state.main.themeMode);
-  const location = useLocation()
-
-  console.log('darkThemeColors', darkThemeColors)
-  console.log('lightThemeColors', lightThemeColors)
-  
-  // let darkTheme = createTheme({
-  //   typography: {
-  //     palette: darkThemeColors,
-  //     fontFamily: [
-  //       `'Montserrat', 
-  //       sans-serif`
-  //     ].join(','),
-  //   }
-  // });
-
+  const location = useLocation();
 
   const mainTheme = createTheme({
     palette: themeMode === 'light' ? lightThemeColors : darkThemeColors,
     typography: {
-      fontFamily: ['Montserrat', 'sans-serif'].join(','),
-      color: ''
+      fontFamily: ['Montserrat', 'sans-serif'].join(',')
     }
-  })
-
-
-  console.log('mainTheme', mainTheme)
-  
-
+  });
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(showLocation, errorHandler)
-  }, [])
+    navigator.geolocation.getCurrentPosition(showLocation, errorHandler);
+  }, []);
 
   useEffect(() => {
-    dispatch(mainAction.setCurrentCity({key: 'inputValue', value: 'Tel Aviv'}))
-    async function getOptions () {
+    dispatch(
+      mainAction.setCurrentCity({ key: 'inputValue', value: 'Tel Aviv' })
+    );
+    async function getOptions() {
       try {
-        const res = await axios.get(`${BASE_URL}${END_POINT.CITIES}`, {params: { apikey: API_KEY, q: 'Tel Aviv' }})
+        const res = await axios.get(`${BASE_URL}${END_POINT.CITIES}`, {
+          params: { apikey: API_KEY, q: 'Tel Aviv' }
+        });
         if (res.status === 200 && res.data.length) {
-            const newValue = res.data.find(option => option.Key === TEL_AVIV_KEY)
-            dispatch(mainAction.setCurrentCity({key: 'value', value: newValue}))
+          const newValue = res.data.find(
+            (option) => option.Key === TEL_AVIV_KEY
+          );
+          dispatch(
+            mainAction.setCurrentCity({ key: 'value', value: newValue })
+          );
         }
       } catch (error) {
-        dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Something went wrong', timeout: 3000}));
+        dispatch(
+          actionSnackbar.setSnackbar({
+            type: 'error',
+            message: 'Something went wrong',
+            timeout: 3000
+          })
+        );
       }
-      }
-    getOptions()
-  }, [])
+    }
+    getOptions();
+  }, []);
 
   const showLocation = async (position) => {
     const latitude = position.coords.latitude;
     const longitude = position.coords.longitude;
     try {
-      const res = await axios.get(`${BASE_URL}${END_POINT.GEOLOCATION}`, {params: { apikey: API_KEY, q: `${latitude},${longitude}`, toplevel: true }})
+      const res = await axios.get(`${BASE_URL}${END_POINT.GEOLOCATION}`, {
+        params: {
+          apikey: API_KEY,
+          q: `${latitude},${longitude}`,
+          toplevel: true
+        }
+      });
       if (res.status === 200) {
-        console.log('res', res)
-          dispatch(mainAction.setCurrentCity({key: 'inputValue', value: res.data.LocalizedName}))
-          dispatch(mainAction.setCurrentCity({key: 'value', value: res.data}))
+        dispatch(
+          mainAction.setCurrentCity({
+            key: 'inputValue',
+            value: res.data.LocalizedName
+          })
+        );
+        dispatch(mainAction.setCurrentCity({ key: 'value', value: res.data }));
       }
     } catch (error) {
-      dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Something went wrong', timeout: 3000}));
+      dispatch(
+        actionSnackbar.setSnackbar({
+          type: 'error',
+          message: 'Something went wrong',
+          timeout: 3000
+        })
+      );
     }
- }
+  };
 
- const errorHandler = (err) => {
-    // if(err.code === 1) {
-    //    dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Access is denied!', timeout: 3000}));
-    // } else 
-    if( err.code === 2) {
-       dispatch(actionSnackbar.setSnackbar({type: 'error', message: 'Position is unavailable!', timeout: 3000}));
-    } 
- }
+  const errorHandler = (err) => {
+    if (err.code === 2) {
+      dispatch(
+        actionSnackbar.setSnackbar({
+          type: 'error',
+          message: 'Position is unavailable!',
+          timeout: 3000
+        })
+      );
+    }
+  };
 
   const generateBackGroundImage = (weatherText, themeMode, pathname) => {
     if (pathname === '/favorites') {
@@ -114,59 +127,53 @@ function App() {
       }
     } else {
       if (themeMode === 'light') {
-      if (weatherText.toUpperCase().includes('SUN')) {
-        console.log('SUN');
-        return `url(${Sunny})`;
-      } else if (weatherText.toUpperCase().includes('RAIN')) {
-        console.log('RAIN');
-        return `url(${Rainy})`;
-      } else if (weatherText.toUpperCase().includes('CLOUD') || weatherText.toUpperCase().includes('OVERCAST')) {
-        console.log('CLOUD');
-        return `url(${Cloudy})`;
-      } else if (weatherText.toUpperCase().includes('SNOW')) {
-        console.log('SNOW');
-      return `url(${Snow})`;
-      }  else {
-        console.log('CLEAR');
-        return `url(${Clear})`;
-      }
-    } else {
-      if (weatherText.toUpperCase().includes('SUN')) {
-        console.log('SUN');
-        return `url(${SunnyDark})`;
-      } else if (weatherText.toUpperCase().includes('RAIN')) {
-        console.log('RAIN');
-        return `url(${RainyDark})`;
-      } else if (weatherText.toUpperCase().includes('CLOUD') || weatherText.toUpperCase().includes('OVERCAST')) {
-        console.log('CLOUD');
-        return `url(${CloudyDark})`;
-      } else if (weatherText.toUpperCase().includes('SNOW')) {
-        console.log('SNOW');
-      return `url(${SnowDark})`;
-      }  else {
-        console.log('CLEAR');
-        return `url(${ClearDark})`;
+        if (weatherText.toUpperCase().includes('SUN')) {
+          return `url(${Sunny})`;
+        } else if (weatherText.toUpperCase().includes('RAIN')) {
+          return `url(${Rainy})`;
+        } else if (
+          weatherText.toUpperCase().includes('CLOUD') ||
+          weatherText.toUpperCase().includes('OVERCAST')
+        ) {
+          return `url(${Cloudy})`;
+        } else if (weatherText.toUpperCase().includes('SNOW')) {
+          return `url(${Snow})`;
+        } else {
+          return `url(${Clear})`;
+        }
+      } else {
+        if (weatherText.toUpperCase().includes('SUN')) {
+          return `url(${SunnyDark})`;
+        } else if (weatherText.toUpperCase().includes('RAIN')) {
+          return `url(${RainyDark})`;
+        } else if (
+          weatherText.toUpperCase().includes('CLOUD') ||
+          weatherText.toUpperCase().includes('OVERCAST')
+        ) {
+          return `url(${CloudyDark})`;
+        } else if (weatherText.toUpperCase().includes('SNOW')) {
+          return `url(${SnowDark})`;
+        } else {
+          return `url(${ClearDark})`;
+        }
       }
     }
-    }
-    
-    
   };
 
   const styleProps = {
-    // backgroundImage: currentWeather ? generateBackGroundImage('sun', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
-
-    backgroundImage:
-      currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
+    backgroundImage: currentWeather
+      ? generateBackGroundImage(
+          currentWeather.WeatherText,
+          themeMode,
+          location.pathname
+        )
+      : generateBackGroundImage('', themeMode, location.pathname)
   };
   const classes = useStyles(styleProps);
 
   return (
     <ThemeProvider theme={mainTheme}>
-      <div 
-      className={classes.mainContainer}
-        // ['wrapper']: location.pathname !== '/favorites'
-        >
+      <div className={classes.mainContainer}>
         <TopBar />
         <CustomizedSnackbar />
         <Switch>
@@ -176,7 +183,7 @@ function App() {
         </Switch>
       </div>
     </ThemeProvider>
-  )
+  );
 }
 
 export default App;
