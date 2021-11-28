@@ -58,6 +58,7 @@ function TopBar() {
             <Grid container justifyContent='flex-end' alignItems='center'>
               <Grid item xs={4}>
                 <DarkModeToggleButton
+                        value="mode"
                         selected={themeMode === 'dark'}
                         onChange={toggleThemeMode}>
                   <Brightness3Icon className={clsx(classes.darkMode,{
@@ -109,7 +110,7 @@ function TopBar() {
       <AppBar position='fixed' className={classes.mobileTopBar} elevation={0}>
       <Grid container direction='row' alignItems='center' justifyContent='flex-end'>
           <>
-          <DarkModeToggleButton className={classes.mobileDark} selected={themeMode === 'dark'}
+          <DarkModeToggleButton value="mode" className={classes.mobileDark} selected={themeMode === 'dark'}
                         onChange={toggleThemeMode}>
             <Brightness3Icon className={clsx(classes.darkMode,{
                     [classes.darkModeSelected]: themeMode === 'dark'

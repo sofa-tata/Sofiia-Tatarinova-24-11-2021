@@ -10,7 +10,7 @@ import { useStyles, CustomizedToggleButton } from '../utils/styles/MainStyles';
 import DayComponent from '../components/DayComponent';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import 'animate.css';
 
 function WeatherPage() {
   const classes = useStyles();
@@ -78,7 +78,7 @@ function WeatherPage() {
           <Grid container justifyContent='center'>
 
             <Grid item xs={12}>
-              <Grid container className={classes.cityAndFavContainer} justifyContent='space-between'>
+              <Grid container className={classes.cityAndFavContainer} justifyContent='space-between' alignItems='center'>
 
                 {/* <Grid item xs={6}>
                   <Grid container justifyContent='flex-start'> */}
@@ -87,7 +87,7 @@ function WeatherPage() {
                         {/* <Grid item>
                 IMAGE?
               </Grid> */}
-                        <Grid item xs={6} md={4} lg={2}>
+                        <Grid item xs={6} md={5} lg={3}>
                           <Grid container alignItems='center' className={classes.mainContent}>
                             <Grid item xs={12}>
                               <Typography className={classes.locationName}>
@@ -108,19 +108,21 @@ function WeatherPage() {
                   <Grid container justifyContent='flex-end'>
                     <Grid item>
                       <CustomizedToggleButton
+                        value="fav"
                         selected={isCurrentCityInFav}
                         onChange={handleChange}
+                        
                       >
                         {isCurrentCityInFav ? (
-                          <>
-                          <FavoriteIcon className={classes.heart}/>
+                          <Grid container>
+                          <FavoriteIcon className={`${classes.heart} animate__animated animate__heartBeat`}/>
                           {md && <Typography>&nbsp;&nbsp;In favorites</Typography>}
-                          </>
+                          </Grid>
                         ) : (
-                          <>
+                          <Grid container>
                           <FavoriteBorderIcon />
                           {md && <Typography>&nbsp;&nbsp;Add to favorites</Typography>}
-                          </>
+                          </Grid>
                         )}
                         
                       </CustomizedToggleButton>

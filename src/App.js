@@ -9,7 +9,7 @@ import { ThemeProvider, createTheme } from '@material-ui/core/styles';
 import CustomizedSnackbar from './components/Snackbar';
 import { useStyles } from './utils/styles/MainStyles'
 import Sunny from './assets/images/glenn-carstens-peters-sunny.jpg';
-import Clear from './assets/images/andrej-chudy-clear.jpg';
+import Clear from './assets/images/pexels-scott-webb-clear.jpg';
 import Rainy from './assets/images/kumiko-shimizu-rainy.jpg';
 import Cloudy from './assets/images/harmen-jelle-van-mourik-cloudy.jpg';
 import Snow from './assets/images/fabian-mardi-snow.jpg';
@@ -92,7 +92,7 @@ function App() {
       } else if (weatherText.toUpperCase().includes('RAIN')) {
         console.log('RAIN');
         return `url(${Rainy})`;
-      } else if (weatherText.toUpperCase().includes('CLOUD')) {
+      } else if (weatherText.toUpperCase().includes('CLOUD') || weatherText.toUpperCase().includes('OVERCAST')) {
         console.log('CLOUD');
         return `url(${Cloudy})`;
       } else if (weatherText.toUpperCase().includes('SNOW')) {
@@ -109,7 +109,7 @@ function App() {
       } else if (weatherText.toUpperCase().includes('RAIN')) {
         console.log('RAIN');
         return `url(${RainyDark})`;
-      } else if (weatherText.toUpperCase().includes('CLOUD')) {
+      } else if (weatherText.toUpperCase().includes('CLOUD') || weatherText.toUpperCase().includes('OVERCAST')) {
         console.log('CLOUD');
         return `url(${CloudyDark})`;
       } else if (weatherText.toUpperCase().includes('SNOW')) {
@@ -126,10 +126,10 @@ function App() {
   };
 
   const styleProps = {
-    backgroundImage: currentWeather ? generateBackGroundImage('clear', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
+    backgroundImage: currentWeather ? generateBackGroundImage('sun', themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
 
     // backgroundImage:
-    //   currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode) : generateBackGroundImage('', themeMode)
+    //   currentWeather ? generateBackGroundImage(currentWeather.WeatherText, themeMode, location.pathname) : generateBackGroundImage('', themeMode, location.pathname)
   };
   const classes = useStyles(styleProps);
 

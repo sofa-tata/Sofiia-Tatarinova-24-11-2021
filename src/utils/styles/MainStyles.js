@@ -31,7 +31,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     mainWeatherText: {
       fontSize: '40px',
-      color: theme.palette.text.main
+      color: theme.palette.text.main,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '32px'
+      },
     },
     mainWeatherTextContainer: {
       marginTop: '60px'
@@ -41,14 +44,20 @@ export const useStyles = makeStyles((theme) => ({
       paddingBottom: '10px'
     },
     temperatureValue: {
-      fontSize: '22px',
+      fontSize: '26px',
       fontWeight: 600,
-      color: theme.palette.text.main
+      color: theme.palette.text.main,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '22px',
+      },
     },
     locationName: {
-      fontSize: '22px',
-      fontWeight: 600,
-      color: theme.palette.text.main
+      fontSize: '24px',
+      fontWeight: 400,
+      color: theme.palette.text.main,
+      [theme.breakpoints.down('sm')]: {
+        fontSize: '20px',
+      },
     },
     mainContent: {
       // backgroundColor: 'pink',
@@ -63,6 +72,10 @@ export const useStyles = makeStyles((theme) => ({
 
   export const CustomizedToggleButton = withStyles((theme) => ({
     root: {
+      minWidth: '179px',
+      [theme.breakpoints.down('sm')]: {
+        minWidth: '55px',
+      },
       backgroundColor: 'transparent',
       border: 'none',
       color: theme.palette.text.main,
