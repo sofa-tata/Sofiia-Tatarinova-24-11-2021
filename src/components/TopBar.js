@@ -16,6 +16,7 @@ import clsx from 'clsx';
 import Brightness3Icon from '@material-ui/icons/Brightness3';
 import { useSelector, useDispatch } from 'react-redux';
 import * as mainAction from '../redux/main/mainSlice';
+import { REPOSITORY_NAME } from '../utils/constants';
 
 function TopBar() {
   const classes = useStyles();
@@ -48,7 +49,7 @@ function TopBar() {
         <Toolbar>
           <Grid container justifyContent='space-between' alignItems='center'>
             <Grid item sm={4}>
-              <Link to={'/home'} className={classes.link}>
+              <Link to={`${REPOSITORY_NAME}/home`} className={classes.link}>
                 <Typography variant='h6' className={classes.title}>
                   Herolo Weather Task
                 </Typography>
@@ -70,11 +71,11 @@ function TopBar() {
                   </DarkModeToggleButton>
                 </Grid>
                 <Grid item xs={3}>
-                  <Link to={'/home'} className={classes.link}>
+                  <Link to={`${REPOSITORY_NAME}/home`} className={classes.link}>
                     <Typography
                       className={clsx({
                         [classes.currentLink]:
-                          location.pathname !== '/favorites'
+                          location.pathname !== `${REPOSITORY_NAME}/favorites`
                       })}
                     >
                       Home
@@ -82,11 +83,11 @@ function TopBar() {
                   </Link>
                 </Grid>
                 <Grid item xs={3}>
-                  <Link to={'/favorites'} className={classes.link}>
+                  <Link to={`${REPOSITORY_NAME}/favorites`} className={classes.link}>
                     <Typography
                       className={clsx({
                         [classes.currentLink]:
-                          location.pathname === '/favorites'
+                          location.pathname === `${REPOSITORY_NAME}/favorites`
                       })}
                     >
                       Favorites
@@ -105,19 +106,19 @@ function TopBar() {
     return (
       <>
         <Link
-          to='/home'
+          to={`${REPOSITORY_NAME}/home`}
           onClick={toggleDrawer(false)}
           className={clsx(classes.menuLink, {
-            [classes.currentPageLinkMobile]: location.pathname !== '/favorites'
+            [classes.currentPageLinkMobile]: location.pathname !== `${REPOSITORY_NAME}/favorites`
           })}
         >
           HOME
         </Link>
         <Link
-          to='/favorites'
+          to={`${REPOSITORY_NAME}/favorites`}
           onClick={toggleDrawer(false)}
           className={clsx(classes.menuLink, {
-            [classes.currentPageLinkMobile]: location.pathname === '/favorites'
+            [classes.currentPageLinkMobile]: location.pathname === `${REPOSITORY_NAME}/favorites`
           })}
         >
           FAVORITES

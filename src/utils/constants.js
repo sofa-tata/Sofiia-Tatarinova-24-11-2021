@@ -1,6 +1,8 @@
 export const API_KEY = process.env.REACT_APP_API_KEY
 export const BASE_URL = process.env.REACT_APP_BASE_URL
 
+export const REPOSITORY_NAME = '/Sofiia-Tatarinova-24-11-2021'
+
 export const END_POINT = {
     CITIES: '/locations/v1/cities/autocomplete',
     CURRENT_WEATHER: '/currentconditions/v1',
