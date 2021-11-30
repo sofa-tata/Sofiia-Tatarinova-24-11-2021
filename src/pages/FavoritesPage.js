@@ -5,6 +5,7 @@ import CityComponent from '../components/CityComponent';
 import { useStyles } from '../utils/styles/FavoritesStyles';
 import { Link } from 'react-router-dom';
 import * as mainAction from '../redux/main/mainSlice';
+import { REPOSITORY_NAME } from '../utils/constants';
 
 function FavoritesPage() {
   const classes = useStyles();
@@ -33,7 +34,7 @@ function FavoritesPage() {
                   {favorites.map((city, index) => (
                     <Grid item xs={12} sm={12} md={6} lg={3} key={index}>
                       <Link
-                        to='/home'
+                        to={`${REPOSITORY_NAME}/home`}
                         className={classes.link}
                         onClick={() => openFavoriteCity(city, city.name)}
                       >
