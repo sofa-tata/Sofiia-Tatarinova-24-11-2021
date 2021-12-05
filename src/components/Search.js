@@ -17,7 +17,7 @@ function Search() {
       dispatch(mainAction.getCurrentWeather(currentCity.value.Key));
       dispatch(mainAction.getFiveDaysForecast(currentCity.value.Key));
     }
-  }, [currentCity]);
+  }, [currentCity.value]);
 
   const handleInputChange = (value) => {
     dispatch(mainAction.setCurrentCity({ key: 'inputValue', value: value }));
